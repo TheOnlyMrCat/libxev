@@ -653,7 +653,9 @@ pub const Completion = struct {
             },
 
             .poll => .{
-                .poll = if (res >= 0) {} else switch (@as(posix.E, @enumFromInt(-res))) {
+                .poll = if (res >= 0)
+                    @intCast(res)
+                else switch (@as(posix.E, @enumFromInt(-res))) {
                     else => |errno| posix.unexpectedErrno(errno),
                 },
             },
@@ -859,7 +861,7 @@ pub const Result = union(OperationType) {
     accept: AcceptError!posix.socket_t,
     close: CloseError!void,
     connect: ConnectError!void,
-    poll: PollError!void,
+    poll: PollError!u32,
     read: ReadError!usize,
     pread: ReadError!usize,
     recv: ReadError!usize,
