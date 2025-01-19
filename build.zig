@@ -180,15 +180,19 @@ pub fn build(b: *std.Build) !void {
     }
 
     // Benchmarks
-    _ = try benchTargets(b, target, optimize, bench_install, bench_name);
+    // _ = try benchTargets(b, target, optimize, bench_install, bench_name);
 
     // Examples
-    _ = try exampleTargets(b, target, optimize, static_c_lib, example_install, example_name);
+    // _ = try exampleTargets(b, target, optimize, static_c_lib, example_install, example_name);
+
+    _ = bench_install;
+    _ = static_c_lib;
+    _ = example_install;
 
     // Man pages
     if (man_pages) {
-        const scdoc_step = ScdocStep.create(b);
-        try scdoc_step.install();
+        // const scdoc_step = ScdocStep.create(b);
+        // try scdoc_step.install();
     }
 }
 
